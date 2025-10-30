@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SQL Query problems</title>
+<style>
+  /* --- Global Table Styling --- */
+table {
+    /* Sets the overall width and centers the table */
+    width: 80%;
+    margin: 20px auto; 
+    /* Ensures borders around cells merge cleanly */
+    border-collapse: collapse; 
+    /* Slightly less dense font for better readability */
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    /* Light border around the whole table */
+    border: 1px solid #ccc; 
+}
+
+/* --- Caption Styling --- */
+caption {
+    /* Moves the caption below the table and left-aligns it */
+    caption-side: bottom;
+    text-align: left;
+    /* Makes the caption text smaller and adds space */
+    font-size: 0.9em;
+    padding: 8px 0;
+    /* Uses a light, subtle color for the text */
+    color: #666;
+    /* Ensures the caption text is not overly bold */
+    font-weight: normal; 
+}
+
+/* --- Header Cell Styling (th) --- */
+th {
+    /* A subtle, light gray background for the header row */
+    background-color: #f2f2f2;
+    /* Darker text for contrast */
+    color: #333;
+    /* Padding for spacing inside cells */
+    padding: 12px 15px; 
+    /* Default left-alignment */
+    text-align: left; 
+    /* A bold but not overbearing font weight */
+    font-weight: 600;
+    /* Adds a bottom border to separate the header from the body */
+    border-bottom: 2px solid #ddd;
+}
+
+/* --- Data Cell Styling (td) --- */
+td {
+    /* Padding for data cells */
+    padding: 10px 15px;
+    /* Light horizontal border for clear separation */
+    border-bottom: 1px solid #eee;
+    /* Vertical alignment for consistency */
+    vertical-align: top;
+}
+
+/* --- Hover Effect and Zebra Stripes (Enhanced Readability) --- */
+
+/* Highlight the entire row when the mouse is over it */
+tbody tr:hover {
+    background-color: #f5f5f5;
+    /* Keep the cursor default */
+    cursor: default; 
+}
+
+/* Add "zebra stripes" for alternating row colors */
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Remove the bottom border from the last row */
+tbody tr:last-child td {
+    border-bottom: none;
+  }
+  </style>
+</head>
+<body>
+    <h1>SQL Query problem</h1>
+
+    <p> Here is a set of tables.</p>
+    
+    <div>{{ tables_html |safe }}</div> 
+
+    <h2>SQL basic questions</h2>
+
+    <p>Write the SQL for the following queries:</p>
+    
+    <div>{{ sql_basic_html |safe }}</div> 
+
+    <h2>SQL advanced questions</h2>
+    <p>Write the SQL for the following queries:</p>
+    
+    <div>{{ sql_join_html |safe }}</div> 
+
+    <h2>SQL expert questions</h2>
+    <p>Write the SQL for the following queries:</p>
+    <div>{{ sql_groupby_html |safe }}</div> 
+
+    
+
+</body>
+</html>
