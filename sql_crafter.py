@@ -10,7 +10,7 @@ def sql_queries_problem(theme:str):
     output['theme'] = theme
     messages =         [
             {"role": "system", "content": "This is in the context of writing exam questions. If I ask  to give me something; just give me the thing. Don't put any fluff around it. If I ask for description of queries. Don't give me the queries, JUST the prompt that you would give a student. If I ask the same question multiple times, give me a different answer."},
-            {"role": "user", "content": "Give me a set of relational tables on the theme of \"{}\". Make sure to include a small sample of data.".format(theme)},
+            {"role": "user", "content": "Give me a set of relational tables on the theme of \"{}\". Make sure to include a small sample of data. No more than 4 tables.".format(theme)},
         ]
 
     
