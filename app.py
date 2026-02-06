@@ -12,10 +12,10 @@ def sql_query():
     
     my_problem = sql_queries_problem(mytheme)
     
-    my_problem['tables_html'] = table_format_html(my_problem['tables'])
-    my_problem['sql_basic_html'] = question_format_html(my_problem['sql_basic'])
-    my_problem['sql_join_html'] = question_format_html(my_problem['sql_join'])
-    my_problem['sql_groupby_html'] = question_format_html(my_problem['sql_groupby'])
+#    my_problem['tables_html'] = table_format_html(my_problem['tables'])
+#    my_problem['sql_basic_html'] = question_format_html(my_problem['sql_basic'])
+#    my_problem['sql_join_html'] = question_format_html(my_problem['sql_join'])
+#    my_problem['sql_groupby_html'] = question_format_html(my_problem['sql_groupby'])
 
     return my_problem
 
@@ -29,10 +29,10 @@ def sql_query_html():
 
     return render_template('sql_query.html',
                            theme = problem['theme'],
-                           tables_html = problem['tables_html'],
-                           sql_basic_html = problem['sql_basic_html'],
-                           sql_join_html = problem['sql_join_html'],
-                           sql_groupby_html = problem['sql_groupby_html'])
+                           tables = problem['tables'],
+                           sql_basic = problem['sql_basic'],
+                           sql_join = problem['sql_join'],
+                           sql_groupby = problem['sql_groupby'])
 
 @app.route('/api/theme')
 def theme_route():

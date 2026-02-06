@@ -82,24 +82,51 @@ tbody tr:last-child td {
 
     <p> Here is a set of tables on the theme of {{ theme }}</p>
     
-    <div>{{ tables_html |safe }}</div> 
-
-    <h2>SQL basic questions</h2>
-
-    <p>Write the SQL for the following queries:</p>
+    {% for table in tables %}
+    <h3>{{ table.relationname }}</h3>
+    <table>
+        <thead>
+            <tr>
+                {% for field in table.fields %}
+                    <th>{{ field }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table.data %}
+                <tr>
+                    {% for value in row %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
     
-    <div>{{ sql_basic_html |safe }}</div> 
-
+    <h2>SQL basic questions</h2>
+    <p>Write the SQL for the following queries:</p>
+    <ol>
+    {% for item in sql_basic %}
+      <li>{{ item.prompt }}
+    {% endfor %}
+    </ol>
+      
     <h2>SQL advanced questions</h2>
     <p>Write the SQL for the following queries:</p>
-    
-    <div>{{ sql_join_html |safe }}</div> 
-
+    <ol>
+    {% for item in sql_join %}
+      <li>{{ item.prompt }}
+    {% endfor %}
+    </ol>
+	
     <h2>SQL expert questions</h2>
     <p>Write the SQL for the following queries:</p>
-    <div>{{ sql_groupby_html |safe }}</div> 
-
-    
-
+    <ol>
+    {% for item in sql_groupby %}
+      <li>{{ item.prompt }}
+    {% endfor %}
+    </ol>
+	
 </body>
 </html>

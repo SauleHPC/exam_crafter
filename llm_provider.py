@@ -1,12 +1,13 @@
 import aisuite as ai
 import httpx
 import json
+import traceback
 
 #BASE_URL = "https://cci-llm.charlotte.edu/api/v1"
 BASE_URL = "http://localhost:1234/v1"
 API_KEY="dummy"
 
-debug = True
+debug = False
 
 def get_chat_completion(messages):
     provider_configs = {
@@ -30,10 +31,19 @@ def get_chat_completion(messages):
 def _validate(content_str, template):
     try:
         obj = json.loads(content_str)
-        for x in template:
-            obj[x] #tried to generate an exception if malformed
+
+        if isinstance(template, dict):
+            for x in template:
+                obj[x] #tried to generate an exception if malformed
+        if isinstance(template, list):
+            #checking each object like the first one
+            for a in obj:
+                #print (a)
+                for x in template[0]:
+                    a[x] #tried to generate an exception if malformed            
     except Exception as e:
         print (f"cant parse as JSON {content_str}")
+        #traceback.print_exc()
         obj = None
     return obj
 
