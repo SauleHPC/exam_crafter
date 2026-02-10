@@ -84,9 +84,13 @@ def upload_sql_query_route():
     return jsonify({"payload": payload}), 200
 
 
-@app.route('/api/get_random_sql_query')
+@app.route('/api/get_random_sql_query', methods=['POST'])
 def get_random_sql_query_route():
+    check_secret()
     pb = db.get_random_sql_problem()
+
+    if pb == None:
+        abort (404, "Database empty")
 
     return jsonify({"id": pb[0], "pb": pb[1]}), 200
 
@@ -108,6 +112,18 @@ def get_sql_query_route():
     return jsonify({"id": pb[0], "pb": pb[1]}), 200
     
 
+
+
+@app.route('/random_sql_query')
+def random_sql_query_html():
+    k, problem = db.get_random_sql_problem()
+
+    return render_template('sql_query.html',
+                           theme = problem['theme'],
+                           tables = problem['tables'],
+                           sql_basic = problem['sql_basic'],
+                           sql_join = problem['sql_join'],
+                           sql_groupby = problem['sql_groupby'])
 
 
 @app.route('/gen_sql_query')
