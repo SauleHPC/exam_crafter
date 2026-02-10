@@ -2,24 +2,21 @@ import aisuite as ai
 import httpx
 import json
 import traceback
-
-#BASE_URL = "https://cci-llm.charlotte.edu/api/v1"
-BASE_URL = "http://localhost:1234/v1"
-API_KEY="dummy"
+from config import config, load_config
 
 debug = False
 
 def get_chat_completion(messages):
     provider_configs = {
         "openai": {
-            "base_url": BASE_URL,
-            "api_key": API_KEY,
+            "base_url": config["llm"]["base_url"],
+            "api_key": config["llm"]["api_key"],
             "http_client": httpx.Client(verify=False) 
         }
     }
     client = ai.Client( provider_configs =provider_configs )
 
-    real_model = "Llama-3.3-70B-Instruct"
+    real_model = config["llm"]["model"]
     modelparam = "openai:"+real_model
 
     response = client.chat.completions.create(
@@ -87,6 +84,7 @@ def get_chat_completion_JSON(messages, template) -> dict:
     return obj
 
 if __name__ == "__main__":
+    load_config()
     response = get_chat_completion(
         [
             {"role": "system", "content": "Respond in Pirate English."},
@@ -94,4 +92,5 @@ if __name__ == "__main__":
         ]
     )
 
+    
     print (response.choices[0].message.content)
