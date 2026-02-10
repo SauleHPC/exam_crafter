@@ -12,11 +12,6 @@ def sql_query():
     
     my_problem = sql_queries_problem(mytheme)
     
-#    my_problem['tables_html'] = table_format_html(my_problem['tables'])
-#    my_problem['sql_basic_html'] = question_format_html(my_problem['sql_basic'])
-#    my_problem['sql_join_html'] = question_format_html(my_problem['sql_join'])
-#    my_problem['sql_groupby_html'] = question_format_html(my_problem['sql_groupby'])
-
     return my_problem
 
 @app.route('/api/sql_query')

@@ -16,7 +16,7 @@ def theme_selector():
     
     output['themes']=response
 
-    th = output['themes'][random.randint(0,len(output['themes']))]
+    th = output['themes'][random.randint(0,len(output['themes'])-1)]
     
     output['theme_selected']=th["topic"]
    
