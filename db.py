@@ -1,4 +1,5 @@
 import random
+import config
 
 _db_sql_problem = {}
 
@@ -21,9 +22,15 @@ def sql_problem_db_status():
             count[c] = count[c]+1
         else:
             count[c] = 1
-    
+
+    want = config.config['me_as_backend']['maxstore'] - len (_db_sql_problem)
+    for k in _db_sql_problem_access:
+        if _db_sql_problem_access[k] > config.config['me_as_backend']['max_reuse']:
+            want = want+1
+            
     return {"size": len (_db_sql_problem),
-            "access_count": count}
+            "access_count": count,
+            "want": want}
 
 def add_sql_problem(my_id:str, my_pb:dict):
     global _db_sql_problem
@@ -37,7 +44,7 @@ def get_random_sql_problem() -> tuple[str, dict]:
     lk = list(_db_sql_problem.keys())
 
     if len(lk) == 0:
-        return None
+        return None, None
     
     draw = random.randint(0,len(lk)-1)
     k = lk[draw]
@@ -46,7 +53,7 @@ def get_random_sql_problem() -> tuple[str, dict]:
     
 def get_sql_problem(my_id:str) -> tuple[str, dict]:
     if my_id not in _db_sql_problem:
-        return None
+        return None, None
 
     _log_access_sql_problem(my_id)
     return my_id, _db_sql_problem[my_id]

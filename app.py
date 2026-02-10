@@ -122,6 +122,9 @@ def get_sql_query_route():
 def random_sql_query_html():
     k, problem = db.get_random_sql_problem()
 
+    if k == None:
+        abort (404, "database empty")
+    
     return render_template('sql_query.html',
                            theme = problem['theme'],
                            tables = problem['tables'],
@@ -134,6 +137,9 @@ def random_sql_query_html():
 def sql_query_html():
     problem = sql_query()
 
+    if problem == None:
+        abort(404)
+    
     return render_template('sql_query.html',
                            theme = problem['theme'],
                            tables = problem['tables'],

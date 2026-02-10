@@ -13,7 +13,7 @@ config = {
     },
     "me_as_backend": { #configure flask api access
         "secret": "wouldn't you like to know?",
-        "maxstore": 100, # how many you want to store at most
+        "maxstore": 10, # how many you want to store at most
         "max_reuse": 5 # how many times you want to reuse one at most
     }
 }
