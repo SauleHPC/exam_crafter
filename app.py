@@ -32,6 +32,10 @@ def sql_query():
     
     return my_problem
 
+@app.route('/api/sql_problem_db_status')
+def sql_db_status():
+    return jsonify(db.sql_problem_db_status()), 200
+
 @app.route('/api/gen_sql_query')
 def sql_query_route():
     return jsonify(sql_query())
