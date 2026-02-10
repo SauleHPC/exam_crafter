@@ -38,5 +38,11 @@ if __name__ == "__main__":
     howmany = max(howmany,0)
     
     for i in range (howmany):
-        generate_one()
-    
+        try:
+            generate_one()
+        except Exception as e: #all kind of bad things can happen in normal operations
+            print ('==========exception=============')
+            print(e)
+            traceback.print_exc()
+            print ('================================')
+            
