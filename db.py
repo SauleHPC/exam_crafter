@@ -24,13 +24,41 @@ def sql_problem_db_status():
             count[c] = 1
 
     want = config.config['me_as_backend']['maxstore'] - len (_db_sql_problem)
+    prune = 0
     for k in _db_sql_problem_access:
-        if _db_sql_problem_access[k] > config.config['me_as_backend']['max_reuse']:
+        if _db_sql_problem_access[k] >= config.config['me_as_backend']['max_reuse']:
             want = want+1
+            prune = prune+1
             
     return {"size": len (_db_sql_problem),
             "access_count": count,
-            "want": want}
+            "want": want,
+            "prune": prune}
+
+def prune_list() -> list:
+    plist = []
+    for k in _db_sql_problem_access:
+        if _db_sql_problem_access[k] >= config.config['me_as_backend']['max_reuse']:
+            plist.append(k)
+    return plist
+    
+
+def prune():
+    global _db_sql_problem
+    global _db_sql_problem_access
+
+    howmany = len (_db_sql_problem) - config.config['me_as_backend']['maxstore']
+    if howmany <= 0:
+        return
+    plist = prune_list()
+
+    for k in plist:
+        del _db_sql_problem[k]
+        del _db_sql_problem_access[k]
+        howmany = howmany - 1
+        if howmany <= 0:
+            return
+    
 
 def add_sql_problem(my_id:str, my_pb:dict):
     global _db_sql_problem
@@ -38,7 +66,8 @@ def add_sql_problem(my_id:str, my_pb:dict):
     print (f"adding sql_problem {my_id}: {my_pb}")
     
     _db_sql_problem[my_id] = my_pb
-
+    prune()
+    
 
 def get_random_sql_problem() -> tuple[str, dict]:
     lk = list(_db_sql_problem.keys())
