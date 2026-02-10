@@ -3,6 +3,10 @@ import json
 
 debug = False
 
+def validate_sql_problem(problem) -> bool:
+    #should check all kinds of things
+    return True
+
 def format_relations(tables):
     strout=""
     for t in tables:
