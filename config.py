@@ -12,7 +12,7 @@ config = {
         "secret": "wouldn't you like to know?",
     },
     "me_as_backend": { #configure flask api access
-        "secret:": "wouldn't you like to know?",
+        "secret": "wouldn't you like to know?",
     }
 }
 
