@@ -27,7 +27,7 @@ def generate_one():
 
 def how_many_you_want():
     ret = requests.get(config["remote_backend"]["url"]+"/api/sql_problem_db_status")
-    response.raise_for_status()
+    ret.raise_for_status()
     return ret.json()['want']
     
 if __name__ == "__main__":
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     for i in range (howmany):
         try:
             generate_one()
-        except Exception as e: #all kind of bad things can happen in normal operations
+        except Exception as e: #all kind of bad things can happen in normal operations
             print ('==========exception=============')
             print(e)
             traceback.print_exc()
