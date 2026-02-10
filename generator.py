@@ -4,16 +4,15 @@ import theme
 import uuid
 import requests
 
-if __name__ == "__main__":
+def generate_one():
     my_theme = theme.theme_selector()
     
     my_problem = sql_crafter.sql_queries_problem(my_theme["theme_selected"])
 
     if my_problem == None:
         print ("could not gen")
-        exit (-1)
+        return
         
-    
     my_uuid = uuid.uuid4().hex
 
     payload = {my_uuid: my_problem}
@@ -24,4 +23,20 @@ if __name__ == "__main__":
     ret = requests.post(config["remote_backend"]["url"]+"/api/upload_sql_query", json=data)
     
     print (ret)
+    
+
+def how_many_you_want():
+    ret = requests.get(config["remote_backend"]["url"]+"/api/sql_problem_db_status")
+    response.raise_for_status()
+    return ret.json()['want']
+    
+if __name__ == "__main__":
+    atmost = 10
+    wanted = how_many_you_want()
+
+    howmany = min(atmost, wanted)
+    howmany = max(howmany,0)
+    
+    for i in range (howmany):
+        generate_one()
     
