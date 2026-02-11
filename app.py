@@ -152,6 +152,9 @@ def theme_route():
     return jsonify(theme.theme_selector())
 
 
+@app.route('/')
+def homepage():
+    return render_template('homepage.html')
 
 
 #print(json.dumps(sql_query(), indent=1))
